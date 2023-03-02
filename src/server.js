@@ -1,7 +1,10 @@
 const express = require("express");
 const viewEngineConfig = require("./config/viewEngineConfig");
 const webRoutes = require("./routes/webRoutes");
+const apiRoutes = require("./routes/apiRoutes");
 const bodyParser = require("body-parser");
+
+const connection = require("./config/db");
 require("dotenv").config();
 
 const app = express();
@@ -15,7 +18,16 @@ viewEngineConfig(app);
 
 // routes
 app.use("/", webRoutes);
+app.use("/api/", apiRoutes);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+// run
+(async () => {
+  try {
+    await connection();
+    app.listen(port, () => {
+      console.log(`BE listening on port ${port}`);
+    });
+  } catch (error) {
+    console.log(">>>>> check error connect db:", error);
+  }
+})();
