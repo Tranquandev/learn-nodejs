@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const { User } = require("../models/user");
 
 const getUsers = async (req, res) => {
   const data = await User.find({});
@@ -9,11 +9,10 @@ const getUsers = async (req, res) => {
   });
 };
 const createUser = async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, email } = req.body;
   const data = await User.create({
     fullName,
     email,
-    password,
   });
   res.status(201).json({
     status: "create user success",
@@ -21,10 +20,10 @@ const createUser = async (req, res) => {
   });
 };
 const updateUser = async (req, res) => {
-  const { fullName, email, password, id } = req.body;
+  const { fullName, email, id } = req.body;
   const data = await User.updateOne(
     { _id: id },
-    { fullName: fullName, email: email, password: password }
+    { fullName: fullName, email: email }
   );
   res.status(200).json({
     status: "update user success",
