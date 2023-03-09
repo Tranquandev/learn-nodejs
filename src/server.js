@@ -8,11 +8,10 @@ const fileUpload = require("express-fileupload");
 const customerRoutes = require("./routes/customerRoutes");
 const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
+const taskRoutes = require("./routes/taskRoutes");
 require("dotenv").config();
-
 const app = express();
 const port = process.env.PORT || 8081;
-
 //config req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +19,14 @@ app.use(express.urlencoded({ extended: true }));
 //config uppload file
 app.use(fileUpload());
 // routes
-app.use("/api/", uploadRoutes, customerRoutes, userRoutes, projectRoutes);
+app.use(
+  "/api/",
+  uploadRoutes,
+  customerRoutes,
+  userRoutes,
+  projectRoutes,
+  taskRoutes
+);
 
 // run
 (async () => {

@@ -1,11 +1,10 @@
-const { default: mongoose } = require("mongoose");
-const User = mongoose.model("User", userSchema);
-const Project = mongoose.model("Project", projectSchema);
+const { default: mongoose, Schema } = require("mongoose");
+
 const taksSchema = new mongoose.Schema({
   name: String,
-  desc: String,
-  users: [User],
-  project: Project,
+  description: String,
+  userId: { type: Schema.Types.ObjectId, ref: "user" },
+  projectId: { type: Schema.Types.ObjectId, ref: "project" },
   status: String,
   startDate: String,
   endDate: String,

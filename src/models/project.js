@@ -8,9 +8,10 @@ const projectSchema = new mongoose.Schema(
     startDate: String,
     endDate: String,
     description: String,
-    customerId: { type: Schema.Types.ObjectId, ref: "Customer" },
-    leaderId: { type: Schema.Types.ObjectId, ref: "User" },
-    usersId: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    customerId: { type: Schema.Types.ObjectId, ref: "customer" },
+    leaderId: { type: Schema.Types.ObjectId, ref: "user" },
+    usersId: [{ type: Schema.Types.ObjectId, ref: "user" }],
+    tasksId: [{ type: Schema.Types.ObjectId, ref: "task" }],
   },
   { timestamps: true }
 );
